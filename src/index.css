@@ -2,14 +2,18 @@
 
 @layer base {
     html {
-        font-family: Inter, system-ui, sans-serif;
+        font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    body {
+        font-family: 'Inter', system-ui, sans-serif;
     }
 }
 
 :root {
     color: #f4f1de;
     background: #07110d;
-    font-family: Inter, system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     line-height: 1.5;
     font-weight: 400;
     font-synthesis: none;
@@ -27,4 +31,174 @@ body,
 
 * {
     box-sizing: border-box;
+}
+
+.shell-brand {
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.36em;
+    text-transform: lowercase;
+}
+
+.shell-nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0.45rem 0.75rem;
+    color: rgba(244, 241, 222, 0.66);
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.42em;
+    text-transform: lowercase;
+    transition: color 180ms ease, opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+.shell-nav-link::after {
+    content: '';
+    position: absolute;
+    right: -0.06rem;
+    top: 50%;
+    width: 1px;
+    height: 1.15rem;
+    background: rgba(244, 241, 222, 0.12);
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 180ms ease;
+}
+
+.shell-nav-link:hover,
+.shell-nav-link:focus-visible {
+    color: rgba(244, 241, 222, 0.95);
+    transform: translateY(-1px);
+}
+
+.shell-nav-link:hover::after,
+.shell-nav-link:focus-visible::after {
+    opacity: 1;
+}
+
+.shell-nav-link-active {
+    color: #f4f1de;
+}
+
+.shell-nav-link-active::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 8px 8px;
+    opacity: 0.35;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    pointer-events: none;
+}
+
+.shell-nav-link-active::after {
+    opacity: 1;
+    background: rgba(244, 241, 222, 0.7);
+}
+
+.shell-hero-title {
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+}
+
+.shell-hero-label {
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.38em;
+    text-transform: lowercase;
+}
+
+.shell-home-grid {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.shell-home-track {
+    display: grid;
+    gap: 0.7rem;
+    padding: 1rem 0 0.25rem;
+    border-top: 1px solid rgba(244, 241, 222, 0.08);
+    border-bottom: 1px solid rgba(244, 241, 222, 0.08);
+}
+
+.shell-home-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: rgba(244, 241, 222, 0.72);
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.24em;
+    text-transform: lowercase;
+}
+
+.shell-home-label {
+    color: rgba(244, 241, 222, 0.42);
+    font-size: 0.64rem;
+}
+
+.shell-home-value {
+    color: #f4f1de;
+    font-size: 0.72rem;
+}
+
+.shell-panel {
+    backdrop-filter: blur(4px);
+}
+
+.shell-panel-label {
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.34em;
+    text-transform: lowercase;
+}
+
+.shell-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.75rem;
+    min-width: 18rem;
+    padding: 0 1.5rem;
+    border: 1px solid rgba(244, 241, 222, 0.2);
+    border-radius: 9999px;
+    background: rgba(10, 12, 14, 0.96);
+    color: #f4f1de;
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.4em;
+    text-transform: lowercase;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    transition: border-color 180ms ease, transform 180ms ease, opacity 180ms ease, background-color 180ms ease;
+}
+
+.shell-button:hover,
+.shell-button:focus-visible {
+    border-color: rgba(244, 241, 222, 0.7);
+    transform: translateY(-1px);
+}
+
+.shell-button:active {
+    transform: translateY(0);
+    opacity: 0.95;
+}
+
+.shell-button-fill {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(244, 241, 222, 0.1);
+    transition: transform 100ms linear, opacity 180ms ease;
+}
+
+.shell-footer-copy {
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+    letter-spacing: 0.34em;
+    text-transform: lowercase;
 }

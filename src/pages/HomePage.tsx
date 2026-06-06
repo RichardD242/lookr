@@ -50,18 +50,24 @@ function HomePage() {
             title="home"
             subtitle="start"
         >
-            <button
-                type="button"
-                onPointerDown={startHolding}
-                onPointerUp={stopHolding}
-                onPointerCancel={stopHolding}
-                onPointerLeave={stopHolding}
-                className="group relative mx-auto flex h-14 w-64 items-center justify-center overflow-hidden rounded-full border border-white/30 bg-[#0d1712] px-6 text-xs font-medium tracking-[0.3em] text-white transition hover:border-white/60 md:w-80"
-            >
-                <span className="absolute inset-y-0 left-1/2 w-1/2 origin-left bg-white/12 transition-transform duration-100" style={{ transform: `scaleX(${progress / 100})` }} />
-                <span className="absolute inset-y-0 right-1/2 w-1/2 origin-right bg-white/12 transition-transform duration-100" style={{ transform: `scaleX(${progress / 100})` }} />
-                <span className="relative z-10">use lookr</span>
-            </button>
+            <div className="shell-home-grid">
+                <div className="max-w-l text-left">
+                    <p className="text-gray-400 text-sm leading-relaxed tracking-wide font-sans">
+                        to use lookr, enter your username and run the analysis
+                    </p>
+                </div>
+                <button
+                    type="button"
+                    onPointerDown={startHolding}
+                    onPointerUp={stopHolding}
+                    onPointerCancel={stopHolding}
+                    onPointerLeave={stopHolding}
+                    className="shell-button group"
+                >
+                    <span className="shell-button-fill" style={{ transform: `scaleX(${progress / 100})`, transformOrigin: 'left' }} />
+                    <span className="relative z-10">use lookr</span>
+                </button>
+            </div>
         </PageShell>
     );
 }
