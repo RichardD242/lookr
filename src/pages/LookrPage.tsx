@@ -101,11 +101,11 @@ function LookrPage() {
         const displayName = userData.name || userData.login;
         const profileUrl = isSlack ? '#' : `https://github.com/${userData.login}`;
 
-        const topReposMarkdown = repos.slice(0, 4).map(repo => {
+        const topReposHTML = repos.slice(0, 4).map(repo => {
             const label = isSlack ? `# ${repo.name.toLowerCase()}` : repo.name;
             const starLabel = isSlack ? '★ Active' : `★ ${repo.stargazers_count}`;
-            return `* [**${label}**](${repo.html_url}) - ${starLabel}`;
-        }).join('\n');
+            return `<li style="margin-bottom: 6px;"><a href="${repo.html_url}"><b>${label}</b></a> - <code>${starLabel}</code></li>`;
+        }).join('');
 
         const markdownCode = `
 
@@ -126,8 +126,8 @@ function LookrPage() {
                         <b>${userData.public_repos}</b> ${isSlack ? 'channels' : 'public repos'}
                     </p>
                     <hr />
-                    <h4>${isSlack ? 'Recent Channels' : 'Top Repositories'}</h4>
-                ${topReposMarkdown || '<p>no stuff found.</p>'}
+                    <h4 style="margin-top:0; margin-bottom:12px">${isSlack ? 'Recent Channels' : 'Top Repositories'}</h4>
+                ${topReposHTML || '<ul style="padding-left: 20px; margin: 0;">' + topReposHTML + '<i>no stuff found.</i></li></ul>'}
                 </td>
             </tr>
         </table>
