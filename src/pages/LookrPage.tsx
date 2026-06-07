@@ -95,6 +95,55 @@ function LookrPage() {
         }, 50);
     };
 
+    const handleExportMarkdown = () => {
+        if (!userData) return;
+
+        const displayName = userData.name || userData.login;
+        const profileUrl = isSlack ? '#' : `https://github.com/${userData.login}`;
+
+        const topReposMarkdown = repos.slice(0, 4).map(repo => {
+            const label = isSlack ? `# ${repo.name.toLowerCase()}` : repo.name;
+            const starLabel = isSlack ? '★ Active' : `★ ${repo.stargazers_count}`;
+            return `* [**${label}**](${repo.html_url}) - ${starLabel}`;
+        }).join('\n');
+
+        const markdownCode = `
+
+        <table>
+            <tr>
+                <td align="center" valign="top" width="250">
+                    <img src="${userData.avatar_url}" width="200" style="border-radius: 50%; border: 3px solid ${theme.borderColor};" alt="${displayName}" />
+                    <br />
+                    <h3><a href="${profileUrl}">${displayName}</a></h3>
+                    <p>@${userData.login}</p>
+                </td>
+                <td valign="top">
+                    <p>${userData.bio || 'no bio provided'}</p>
+                    <hr />
+                    <p>
+                        <b>${userData.followers}</b> ${isSlack ? 'members' : 'followers'} &nbsp;&nbsp;
+                        <b>${userData.following}</b> ${isSlack ? 'idk' : 'following'} &nbsp;&nbsp;
+                        <b>${userData.public_repos}</b> ${isSlack ? 'channels' : 'public repos'}
+                    </p>
+                    <hr />
+                    <h4>${isSlack ? 'Recent Channels' : 'Top Repositories'}</h4>
+                ${topReposMarkdown || '<p>no stuff found.</p>'}
+                </td>
+            </tr>
+        </table>
+        `.trim();
+        
+        navigator.clipboard.writeText(markdownCode)
+            .then(() => alert('md-profile copied to clipboard'))
+            .catch(() => alert('failed to copy md'));
+
+
+
+
+    
+    
+    };
+
     return (
         <PageShell title="" subtitle="" withTopo={true}>
             <div style={styles.container}>
@@ -199,16 +248,30 @@ function LookrPage() {
                         <div style={styles.leftCol}>
                             <img src={userData.avatar_url} alt={`${userData.login}'s avatar`} style={{ ...styles.avatar, borderColor: theme.borderColor }} />
                             <h1 style={styles.giantName}>{userData.name || userData.login}</h1>
-                            <button
-                                onClick={() => toggleFavorite(userData.login)}
-                                style={{
-                                    ...styles.favActionButton,
-                                    borderColor: theme.borderColor,
-                                    color: theme.accent,
-                                }}
-                            >
-                                {favorites.includes(userData.login) ? '★ unfavorite' : '☆ favorite'}
-                            </button>
+                            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                <button
+                                    onClick={() => toggleFavorite(userData.login)}
+                                    style={{
+                                        ...styles.favActionButton,
+                                        borderColor: theme.borderColor,
+                                        color: theme.accent,
+                                    }}
+                                >
+                                    {favorites.includes(userData.login) ? '★ unfavorite' : '☆ favorite'}
+                                </button>
+
+                                <button
+                                    onClick={handleExportMarkdown}
+                                    style={{
+                                        ...styles.favActionButton,
+                                        borderColor: theme.borderColor,
+                                        color: '#ffffff',
+                                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                                    }}
+                                >
+                                    export markdown
+                                </button>
+                            </div>
                             <div style={styles.usernameRow}>
                                 <p style={styles.username}>@{userData.login}</p>
                                 <span style={styles.pronouns}>{platform === 'slack' ? 'workspace member' : 'he/him'}</span>
