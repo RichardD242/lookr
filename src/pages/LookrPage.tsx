@@ -31,6 +31,17 @@ function LookrPage() {
     const [repos, setRepos] = useState<GithubRepo[]>([]);
     const [loading, setLoading] = useState(false);
 
+    const [platform, setPlatform] = useState<'github' | 'slack'>('github');
+    const isSlack = platform === 'slack';
+    const theme = {
+        accent: isSlack ? '#E01E5A' : '#e3b341',
+        cardBg: isSlack ? '#222529' : '#1f1f1f',
+        profileBg: isSlack ? '#1A1D21' : '#000000',
+        borderColor: isSlack ? '#3F0E40' : '#30363d',
+    };
+
+
+
     const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!username.trim()) return;
@@ -85,15 +96,57 @@ function LookrPage() {
     };
 
     return (
-        <>
-            <PageShell title="lookr" subtitle="github user search">
-            <div style={styles.titleRow}>
-                <div style={styles.titleText}>lookr</div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style={{ marginTop: '0.8rem', marginLeft: '0.4rem' }} aria-hidden="true">
-                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.931 0-1.31.468-2.381 1.236-3.221-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.291-1.552 3.297-1.23 3.297-1.23.656 1.653.244 2.873.12 3.176.77.84 1.234 1.911 1.234 3.221 0 4.61-2.807 5.628-5.479 5.921.43.372.814 1.102.814 2.222 0 1.606-.014 2.902-.014 3.293 0 .322.218.694.825.576C20.565 22.092 24 17.593 24 12.297 24 5.67 18.627.297 12 .297z"/>
-                </svg>
-            </div>
+        <PageShell title="" subtitle="" withTopo={true}>
             <div style={styles.container}>
+                <div style={styles.sliderContainer}>
+                    <button
+                        type="button"
+                        onClick={() => setPlatform('github')}
+                        style={{
+                            ...styles.sliderBtn,
+                            ...(platform === 'github' ? styles.sliderBtnActive : { color: 'rgba(244, 241, 222, 0.4)' }),
+                        }}
+                    >
+                        GitHub
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setPlatform('slack')}
+                        style={{
+                            ...styles.sliderBtn,
+                            ...(platform === 'slack'
+                                ? { ...styles.sliderBtnActive, backgroundColor: theme.accent, color: '#ffffff' }
+                                : { color: 'rgba(244, 241, 222, 0.4)' }),
+                        }}
+                    >
+                        Slack
+                    </button>
+                </div>
+
+                <div style={styles.titleRow}>
+                    <div style={styles.titleText}>lookr</div>
+                    <div
+                        style={{
+                            ...styles.logoBadge,
+                            borderColor: theme.borderColor,
+                            backgroundColor: theme.profileBg,
+                            color: theme.accent,
+                        }}
+                        aria-hidden="true"
+                    >
+                        {platform === 'github' ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.931 0-1.31.468-2.381 1.236-3.221-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 3.003-.404c1.02.005 2.045.138 3.003.404 2.291-1.552 3.297-1.23 3.297-1.23.656 1.653.244 2.873.12 3.176.77.84 1.234 1.911 1.234 3.221 0 4.61-2.807 5.628-5.479 5.921.43.372.814 1.102.814 2.222 0 1.606-.014 2.902-.014 3.293 0 .322.218.694.825.576C20.565 22.092 24 17.593 24 12.297 24 5.67 18.627.297 12 .297z" />
+                            </svg>
+                        ) : (
+                            <img
+                                src="https://cdn.freebiesupply.com/logos/large/2x/slack-logo-icon.png"
+                                alt="Slack Logo"
+                                style={{ width: '26px', height: '26px', objectFit: 'contain' }}
+                            />
+                        )}
+                    </div>
+                </div>
 
                 {favorites.length > 0 && (
                     <div style={styles.favoritesRow}>
@@ -106,55 +159,96 @@ function LookrPage() {
                     </div>
                 )}
 
-                <form onSubmit={handleSearch} style = {styles.searchForm}>
-                    <div style={styles.searchBarWrapper}>
+                <form onSubmit={handleSearch} style={styles.searchForm}>
+                    <div
+                        style={{
+                            ...styles.searchBarWrapper,
+                            borderColor: theme.borderColor,
+                            backgroundColor: theme.cardBg,
+                        }}
+                    >
                         <input
-                        type="text"
-                        placeholder="search github username..."
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        style={styles.searchInput}
-                    />
-                        <button type="submit" style={styles.searchButton} disabled={loading}>
+                            type="text"
+                            placeholder={isSlack ? "search slack username..." : "search github username..."}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            style={styles.searchInput}
+                        />
+                        <button
+                            type="submit"
+                            style={{
+                                ...styles.searchButton,
+                                backgroundColor: theme.accent,
+                                color: platform === 'slack' ? '#ffffff' : '#000000',
+                            }}
+                            disabled={loading}
+                        >
                             {loading ? 'searching...' : 'Search'}
                         </button>
                     </div>
                 </form>
 
                 {userData && (
-                    <div style={styles.profileCard}>
+                    <div
+                        style={{
+                            ...styles.profileCard,
+                            backgroundColor: theme.profileBg,
+                            borderColor: theme.borderColor,
+                        }}
+                    >
                         <div style={styles.leftCol}>
-                            <img src={userData.avatar_url} alt={`${userData.login}'s avatar`} style={styles.avatar} />
+                            <img src={userData.avatar_url} alt={`${userData.login}'s avatar`} style={{ ...styles.avatar, borderColor: theme.borderColor }} />
                             <h1 style={styles.giantName}>{userData.name || userData.login}</h1>
-                            <button onClick={() => toggleFavorite(userData.login)} style={styles.favActionButton}>
+                            <button
+                                onClick={() => toggleFavorite(userData.login)}
+                                style={{
+                                    ...styles.favActionButton,
+                                    borderColor: theme.borderColor,
+                                    color: theme.accent,
+                                }}
+                            >
                                 {favorites.includes(userData.login) ? '★ unfavorite' : '☆ favorite'}
                             </button>
                             <div style={styles.usernameRow}>
                                 <p style={styles.username}>@{userData.login}</p>
-                                <span style={styles.pronouns}>he/him</span>
+                                <span style={styles.pronouns}>{platform === 'slack' ? 'workspace member' : 'he/him'}</span>
                             </div>
                             {userData.bio && <p style={styles.bio}>{userData.bio}</p>}
 
                             <div style={styles.statsContainer}>
                                 <div style={styles.statBox}>
-                                    <strong>{userData.followers}</strong><span>followers</span>
+                                    <strong>{userData.followers}</strong><span>{isSlack ? 'members' : 'followers'}</span>
                                 </div>
                                 <div style={styles.statBox}>
-                                    <strong>{userData.following}</strong><span>following</span>
+                                    <strong>{userData.following}</strong><span>{isSlack ? 'idk' : 'following'}</span>
                                 </div>
                                 <div style={styles.statBox}>
-                                    <strong>{userData.public_repos}</strong><span>public repos</span>
+                                    <strong>{userData.public_repos}</strong><span>{isSlack ? 'channels' : 'public repos'}</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div style={styles.rightCol}>
-                            <h2 style={styles.reposHeader}>Top Repositories</h2>
+                        <div style={{ ...styles.rightCol, backgroundColor: theme.cardBg, borderColor: theme.borderColor }}>
+                            <h2 style={styles.reposHeader}>{isSlack ? 'Recent Channels' : 'Top Repositories'}</h2>
                             <div style={styles.repoList}>
                                 {repos.slice(0, 4).map((repo) => (
-                                    <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer" style={styles.repoLinkCard}>
-                                        <span style = {{ color: '#ffffff' }}>{repo.name}</span>
-                                        <span style={styles.repoStars}>★ {repo.stargazers_count}</span>
+                                    <a
+                                        key={repo.id}
+                                        href={repo.html_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            ...styles.repoLinkCard,
+                                            backgroundColor: theme.profileBg,
+                                            borderColor: theme.borderColor,
+                                        }}
+                                    >
+                                        <span style={{ color: '#ffffff' }}>
+                                            {isSlack ? `# ${repo.name.toLowerCase()}` : repo.name}
+                                        </span>
+                                        <span style={{ ...styles.repoStars, color: theme.accent }}>
+                                            {isSlack ? '★ Active' : `★ ${repo.stargazers_count}`}
+                                        </span>
                                     </a>
                                 ))}
                             </div>
@@ -163,12 +257,40 @@ function LookrPage() {
                 )}
             </div>
         </PageShell>
-        </>
     );
 }
 
 const styles = {
 
+    sliderContainer: {
+        display: 'flex',
+        backgroundColor: '#1f1f1f',
+        padding: '4px',
+        borderRadius: '20px',
+        marginBottom: '2rem',
+        width: 'fit-content',
+    },
+
+    sliderBtn: {
+        padding: '6px 18px',
+        borderRadius: '16px',
+        border: 'none',
+        backgroundColor: 'transparent',
+        color: 'rgba(244, 241, 222, 0.4)',
+        fontSize: '0.85rem',
+        fontWeight: '600',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease',
+    },
+
+    sliderBtnActive: {
+        backgroundColor: '#f4f1de',
+        color: '#000000',
+    },
+
+    sliderBtnSlackInactive: {
+        color: 'rgba(244, 241, 222, 0.4)',
+    },
 
     favoritesRow: {
         display: 'flex',
@@ -225,6 +347,16 @@ const styles = {
         fontWeight: 700,
         color: '#f4f1de',
         lineHeight: 1,
+    },
+    logoBadge: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '44px',
+        height: '44px',
+        borderRadius: '14px',
+        border: '1px solid #30363d',
+        flexShrink: 0,
     },
     searchForm: {
         display: 'flex',
@@ -369,7 +501,7 @@ const styles = {
     },
     repoStars: {
         fontSize: '0.95rem',
-        color: '#e3b341',
+        // color: '#e3b341',
         backgroundColor: '#21262d',
         padding: '4px 8px',
         borderRadius: '12px',
