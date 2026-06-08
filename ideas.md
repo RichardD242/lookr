@@ -21,6 +21,8 @@ all for now and drink water
 
 to do:
 
+-on the sides add the topographic background blurry
+
 -update the slack bot because i got approved on nest for free linux
 
 -add bot commands with personal channel where you can use the tool inside the channel
