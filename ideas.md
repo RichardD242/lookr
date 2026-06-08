@@ -17,3 +17,12 @@ special markdown badge for github readme like wakatime badges
 all for now and drink water
 
 //// right now working on save for later
+
+
+to do:
+
+-update the slack bot because i got approved on nest for free linux
+
+-add bot commands with personal channel where you can use the tool inside the channel
+
+finalize stuff and host for mini md copy
