@@ -58,16 +58,38 @@ function AboutPage() {
                         <h2 style={styles.heading}>how to use the api</h2>
                         <ol style={styles.list}>
                             <li style={styles.listItem}>
-                                comming soon
+                                1. for ease use, just copy the markdown code from the page.
                             </li>
                             <li style={styles.listItem}>
-                                comming soon
+                                2. slack channel, in the slack channel #lookr you can use commands like /lookr + username to generate a card inside of the channel
                             </li>
                             <li style={styles.listItem}>
-                                comming soon
+                                3. future endpoint could be (because i ddint host yet) lookr.com/api/username
                             </li>
                         </ol>
                     </section>
+
+                    <section style={styles.section}>
+                        <h2 style={styles.heading}>how to use the slack channel</h2>
+                        <p style={styles.text}>
+                            inside the slack channel #lookr, you use the following commands:
+                        </p>
+                        <ul style={styles.list}>
+                            <li style={styles.listItem}>
+                                /lookr + github/slack + username - generates a lookr card for the specified github or slack username
+                            </li>
+                            <li style={styles.listItem}>
+                                /lookr help - shows a list of available commands and usage instructions
+                            </li>
+                            <li style={styles.listItem}>
+                                /lookr repo + username - shows the top repos with the most stars
+                            </li>
+                            <li style={styles.listItem}>
+                                /lookr boss - shows profile of zach latta
+                            </li>
+                        </ul>
+                    </section>
+
                 </div>
             </div>
         </PageShell>
