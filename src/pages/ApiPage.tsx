@@ -67,10 +67,11 @@ function ApiPage() {
 
     const handleCopyMini = () => {
         if(!userData) return;
-        const miniMarkdown = `[LookrCard](COMMING SOON NEED TO HOST FIRST CHILL PLEASE)`;
+
+        const miniMarkdown = `[![LookrCard](https://lookr-zeta.vercel.app/api/card?user=${userData.login})](https://lookr-zeta.vercel.app/)`;
 
         navigator.clipboard.writeText(miniMarkdown)
-            .then(() => alert('mini markdown copied (comming soon)'))
+            .then(() => alert('mini markdown copied comming soon because nest server doesnt work properly'))
             .catch(err => console.error('failed to copy mini markdown', err));
     };
 
