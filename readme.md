@@ -47,17 +47,22 @@ To get a local copy running, follow these steps:
 1. clone the repository:
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/lookr.git](https://github.com/YOUR_USERNAME/lookr.git)
+git clone https://github.com/YOUR_USERNAME/lookr.git
 cd lookr
+```
+
 install dependencies:
 
-Bash
+```bash
 npm install
+```
+
 start local server:
 
-Bash
+```bash
 npm run dev
-Features and Pages
+```
+
 pages
 /features
 
