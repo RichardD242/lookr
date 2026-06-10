@@ -11,7 +11,7 @@ type PageShellProps = {
 const navigation = [
     { label: 'home', href: '/home' },
     { label: 'features', href: '/features' },
-    { label: 'api', href: '/api' },
+    { label: 'api', href: '/api-card' },
     { label: 'about', href: '/about' },
 ] as const;
 

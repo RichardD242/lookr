@@ -20,7 +20,7 @@ function App() {
         return <FeaturesPage />;
     }
 
-    if (path === '/api') {
+    if (path === '/api-card') {
         return <ApiPage />;
     }
 
