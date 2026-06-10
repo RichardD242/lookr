@@ -155,3 +155,13 @@ create a .env file:
 
 run
 npm start or npm run dev
+
+---
+
+## Ai use
+
+ai helped me with:
+
+1. troubleshooting and debugging
+2. configs and dependencies
+3. terminal bugs
