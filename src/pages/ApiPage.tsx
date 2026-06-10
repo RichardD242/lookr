@@ -77,7 +77,7 @@ function ApiPage() {
 
     return (
         <PageShell 
-            title="api" 
+            title="api comming soon because nest server doest work" 
             subtitle= "copy markdon = full md code | copy mini markdown = lookr card markdown (comming soon)"
             >
 
