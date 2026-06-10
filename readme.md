@@ -114,3 +114,44 @@ when typing a slash command in slack the bot did not react and the pm2 logs stay
 
 ### what do i do next
 i will fix the typescript compiler pathing and clear the environment cache later for now i need to ship this version for my event ticket today was spent troubleshooting this in the terminal for 2 hours while the network proxies and ports worked perfectly the application code itself wasnt successfully updating to listen or respond to api calls
+
+---
+
+## for reviewers
+
+### slackbot repo
+
+[repo](https://github.com/RichardD242/lookr-bot)
+
+---
+
+## Slackbot repo readme
+
+a slack slash command bot for slack channel #lookr-sandbox
+
+### description
+
+lookrbot fetches github user info with repo data or slack info directly through the channel with slash commands. users can then view their card with their follower count, repo stats and top repos in order of stars from the hackclub workspace
+
+### important notes
+
+still being worked and wasnt fully tested yet
+
+### technical info
+
+- typescript
+- slack bolt
+- github api
+- axios
+
+### setup
+install dependencies:
+npm install
+
+create a .env file:
+- SLACK_BOT_TOKEN
+- SLACK_SIGNING_SECRET
+- PORT = 3000 or 8080
+
+run
+npm start or npm run dev
