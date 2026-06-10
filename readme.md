@@ -2,6 +2,9 @@
 
 lookr is a minimal profile card generator for github and slack users. (SLACK IS CURRENTLY BEING WORKED ON NEST SERVER IS WORKING MOREOVER IN TROUBLESHOOT)
 
+
+![lookr preview](https://github.com/RichardD242/Website-test/blob/main/readmepic1.png?raw=true)
+
 ---
 
 ## how to use
@@ -11,6 +14,8 @@ lookr is a minimal profile card generator for github and slack users. (SLACK IS 
 1. go to https://lookr-zeta.vercel.app/lookr
 2. enter any github or slack (slack is not supported yet) username
 3. click copy code
+
+![preview slack web](https://github.com/RichardD242/Website-test/blob/main/readmepic3.png?raw=true)
 
 ### 2. slack-version (doesnt work scroll to troubleshoot)
 
@@ -88,6 +93,8 @@ the card updates realtime with unlimited searches
 topographic design looks very clean and cool
 
 slack integration comming soon
+
+![topographics](https://github.com/RichardD242/Website-test/blob/main/readmepic2.png?raw=true)
 
 ---
 
